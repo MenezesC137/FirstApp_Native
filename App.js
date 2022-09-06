@@ -1,23 +1,17 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet} from 'react-native'
+import { Text, View, } from 'react-native'
 
 class App extends Component{
 
   render(){    
     return(
-        <View style={styles.area}>
-          <Text>I am text 1</Text>
-          <Text>I am text 2</Text>
-          <Text>I am text 3</Text>
-          <Text>I am text 4</Text>
+        <View style={{flex:1, margin: 40, backgroundColor: 'blue'}}>
+          <View style={{flex:1, backgroundColor: 'green'}}></View>
+          <View style={{flex:1, backgroundColor: 'yellow'}}></View>
+          <View style={{flex:2, backgroundColor: 'red'}}></View>
         </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  area: {
-    margin: 50
-  }
-})
 export default App
