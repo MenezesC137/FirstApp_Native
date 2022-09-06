@@ -1,41 +1,36 @@
 import React, { Component } from "react";
-import { SafeAreaView, Text, View, Image } from 'react-native'
+import { SafeAreaView, Text, View, Button } from 'react-native'
 
 class App extends Component{
-  render(){
 
-    let nome = 'Francesco VIRGOLINIII'
-    
+  constructor(props){
+
+    super(props)
+
+    this.state = {
+      nome: 'Carlos'
+    }
+
+    this.entrar = this.entrar.bind(this)
+
+  }
+
+  entrar(nome){
+    this.setState({
+      nome
+    })
+  }
+
+  render(){    
     return(
-      <SafeAreaView>
+      <SafeAreaView style={{ margin:20 }}>
         <View style={{ margin:20 }}>
-          <Text>Hello familia!</Text>
-          <Text>Hello familia!</Text>
-          <Text>Hello familia!</Text>
-          <Text>Hello familia!</Text>
-          <Text style={{ color: 'red', fontSize: 25}}>
-            {nome}, a maquina mas veloz de toti italia!!!
-          </Text>
 
-          <Francesco L={350} A={300}/>
-         
+          <Button title='Entrar' onPress={() => this.entrar('Matheus')}/>
+          <Text style={{color: 'yellow', fontSize: 50, textAlign: 'center'}}>{this.state.nome}</Text>
         </View>
       </SafeAreaView>
     )
   }
 }
-
-class Francesco extends Component{
-  render(){
-    let img = 'https://static.wikia.nocookie.net/carros/images/3/33/Francesco-bernoulli.png/revision/latest?cb=20200207014243&path-prefix=pt-br'
-
-    return(
-    <Image 
-      source={{uri: img}}
-      style={{width: this.props.L, height: this.props.A}}
-    />
-  )
-  }
-}
-
 export default App
