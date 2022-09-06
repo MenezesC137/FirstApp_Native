@@ -1,39 +1,28 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TextInput, Button } from "react-native";
+import { Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      nome: "",
-      input: "",
-    };
-    this.entrar = this.entrar.bind(this);
-  }
-
-  entrar() {
-    if (this.state.input === ''){
-      alert('Digite seu nome!')
-      return
-    }
-    
-    this.setState({ nome: 'Bem vindo,' + this.state.input });
-  }
 
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite seu nome!"
-          underlineColorAndroid="transparent"
-          onChangeText={(texto) => this.setState({ input: texto })}
+        <Image 
+          source={require('./src/cronometro.png')}
+          style={styles.img}
         />
-        <Button title="Entrar" onPress={this.entrar} />
-        <Text style={styles.texto}>{this.state.nome}</Text>
+
+        <Text style={styles.timer}>0.0</Text>
+
+        <View style={styles.btnArea}>
+          <TouchableOpacity styles={styles.btn}>
+            <Text>Vai</Text>
+          </TouchableOpacity>
+          <TouchableOpacity styles={styles.btn}>
+            <Text></Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    );
+    )
   }
 }
 
@@ -41,20 +30,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 50,
-  },
-  input: {
-    height: 45,
-    borderWidth: 1,
-    borderColor: "#222",
-    margin: 10,
-    fontSize: 20,
-    padding: 10,
-    color: "#FFF",
-  },
-  texto: {
-    textAlign: "center",
-    fontSize: 25,
-  },
+  }
 });
 
 export default App;
