@@ -1,63 +1,60 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TextInput } from 'react-native'
+import { Text, View, StyleSheet, TextInput, Button } from "react-native";
 
-class App extends Component{
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  constructor(props){
-    super(props)
     this.state = {
-      nome: ''
-    }
-
-    this.pegaNome = this.pegaNome.bind(this)
+      nome: "",
+      input: "",
+    };
+    this.entrar = this.entrar.bind(this);
   }
 
-  pegaNome(texto){
-    if (texto.length > 0){
-      this.setState({nome: 'Bem vindo, ' + texto})
-    } else {
-      this.setState({nome: ''})
+  entrar() {
+    if (this.state.input === ''){
+      alert('Digite seu nome!')
+      return
     }
-
+    
+    this.setState({ nome: 'Bem vindo,' + this.state.input });
   }
 
-  render(){    
-    return(
+  render() {
+    return (
       <View style={styles.container}>
-
-        <TextInput 
-          style={styles.input} 
-          placeholder='Digite seu nome!'
-          underlineColorAndroid='transparent'
-          onChangeText={this.pegaNome}
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu nome!"
+          underlineColorAndroid="transparent"
+          onChangeText={(texto) => this.setState({ input: texto })}
         />
-
+        <Button title="Entrar" onPress={this.entrar} />
         <Text style={styles.texto}>{this.state.nome}</Text>
-      
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    marginTop:50
-
+  container: {
+    flex: 1,
+    marginTop: 50,
   },
   input: {
-    height:45,
+    height: 45,
     borderWidth: 1,
-    borderColor: '#222',
+    borderColor: "#222",
     margin: 10,
-    fontSize:20,
+    fontSize: 20,
     padding: 10,
-    color: '#FFF'
+    color: "#FFF",
   },
-  texto:{
-    textAlign: 'center',
-    fontSize:25
-  }
-})
+  texto: {
+    textAlign: "center",
+    fontSize: 25,
+  },
+});
 
-export default App
+export default App;
