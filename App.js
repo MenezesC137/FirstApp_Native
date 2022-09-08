@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 class App extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      num: 0
+    }
+  }
 
   render() {
     return (
@@ -11,15 +18,18 @@ class App extends Component {
           style={styles.img}
         />
 
-        <Text style={styles.timer}>0.0</Text>
+        <Text style={styles.timer}> {this.state.num.toFixed(1)} </Text>
 
         <View style={styles.btnArea}>
-          <TouchableOpacity styles={styles.btn}>
-            <Text>Vai</Text>
+
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btnTexto}>Vai</Text>
           </TouchableOpacity>
-          <TouchableOpacity styles={styles.btn}>
-            <Text></Text>
+
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btnTexto}>Limpar</Text>
           </TouchableOpacity>
+
         </View>
       </View>
     )
@@ -29,7 +39,34 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
+    alignItems:'center',
+    justifyContent: 'center',
+    backgroundColor: '#00aeef'
+  },
+  timer:{
+    marginTop: -150,
+    color: '#FFF',
+    fontSize: 65,
+    fontWeight: 'bold'
+  },
+  btnArea:{
+    flexDirection: 'row',
+    marginTop: 90,
+    height: 40
+  },
+  btn:{
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    height: 40,
+    margin: 17,
+    borderRadius: 9
+  },
+  btnTexto:{
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#00aeef',
   }
 });
 
