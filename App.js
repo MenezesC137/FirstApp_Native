@@ -1,36 +1,50 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView
+} from "react-native";
 
 class App extends Component {
-
   render() {
     return (
-      <View style={styles.container}>
-        <Image 
-          source={require('./src/cronometro.png')}
-          style={styles.img}
-        />
-
-        <Text style={styles.timer}>0.0</Text>
-
-        <View style={styles.btnArea}>
-          <TouchableOpacity styles={styles.btn}>
-            <Text>Vai</Text>
-          </TouchableOpacity>
-          <TouchableOpacity styles={styles.btn}>
-            <Text></Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    )
+    <View style={styles.container}>
+      <ScrollView >
+        <View style={styles.box1}></View>
+        <View style={styles.box2}></View>
+        <View style={styles.box3}></View>
+        <View style={styles.box4}></View>
+        <View style={styles.box5}></View>
+      </ScrollView>
+    </View>)
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
-  }
+  },
+  box1: {
+    backgroundColor: 'red',
+    height: 250
+  },
+  box2: {
+    backgroundColor: 'green',
+    height: 250
+  },
+  box3: {
+    backgroundColor: 'yellow',
+    height: 250
+  },
+  box4: {
+    backgroundColor: 'blue',
+    height: 250
+  },
+  box5: {
+   backgroundColor: 'pink',
+   height: 250
+ }
 });
 
 export default App;
