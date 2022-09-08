@@ -1,14 +1,13 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import React, { Component } from "react";
 
 import {
   Text,
   View,
   StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Keyboard
+  Button,
+  Platform,
+  Modal,
+  Image
 } from "react-native";
 
 export default class App extends Component {
@@ -18,55 +17,40 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      input: '',
-      nome: ''
+      modal: false
     }
 
-    this.gravarNome = this.gravarNome.bind(this)
+    this.entrar = this.entrar.bind(this)
+    this.sair = this.sair.bind(this)
+
 
   }
 
-  async componentDidMount(){
-    await AsyncStorage.getItem('nome').then((value) => {
-      this.setState({nome: value})
-    })
+  entrar(){
+    this.setState({modal: true})
   }
 
-  async componentDidUpdate(_, prevState){
-    const nome = this.state.nome
-    if(prevState !== nome ){
-      await AsyncStorage.setItem('nome', nome)
-    }
-  }
-
-  gravarNome(){
-    
-    this.setState({
-      nome: this.state.input
-    })
-
-    alert('Salvo com sucesso!')
-    Keyboard.dismiss();
-
+  sair(){
+    this.setState({modal: false})
   }
 
   render(){
     return (
-      <View style={styles.container}>
-        <View style={styles.viewInput}>
-          <TextInput
-            style={styles.input}
-            value={this.state.input}
-            onChangeText={(text)=> this.setState({input: text})}
-            underlineColorAndroid='transparent'
-          />
-          <TouchableOpacity onPress={this.gravarNome}>
-            <Text style={styles.btn}>+</Text>
-          </TouchableOpacity>
-          
-        </View>
+      <View style={styles.container}> 
+        <Button title='Entrar' onPress={ this.entrar } />
 
-        <Text style={styles.nome}> {this.state.nome} </Text>
+        <Modal animationType="slide" visible={this.state.modal}>
+          <View >
+            <Text style={{fontSize:30, marginLeft: 35, marginTop:20}}>BORAAAAA BILLLL!!!!</Text>
+            <Image 
+              style={{width: 350, height: 300, marginLeft: 27}}
+              source={{uri: 'https://s2.glbimg.com/JLTqyzDpN1E9ArdIqmfy1c51Sd0=/0x0:1600x1162/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2022/4/i/FVTCuVTUWNhqc8V65g9Q/bora-bill-meme.jpg'}}
+            />
+            <View style={{marginTop: 50}}>
+              <Button title={'Sair'} onPress={ this.sair } />
+            </View>
+          </View>
+        </Modal>
       </View>
     )
   }
@@ -76,28 +60,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 50,
-    marginLeft: 10
-  },
-  viewInput: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  input: {
-    width:350,
-    height:40,
-    borderColor: "#000",
-    borderWidth: 1,
-    padding: 1
-  },
-  btn:{
-    backgroundColor: "#222",
-    color: "#FFF",
-    height: 40,
-    padding: 10,
-  },
-  nome: {
-    marginTop: 15,
-    fontSize: 30,
-    textAlign: 'center'
   }
 })
