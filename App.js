@@ -1,54 +1,75 @@
 import React, { Component } from "react";
 
-import {
-  View,
-  StyleSheet,
-  Text,
-  FlatList
-} from "react-native";
-
-import api from "./src/services/api";
-
-import Filmes from "./src/filmes";
+import { View, StyleSheet, Text, FlatList, Animated } from "react-native";
 
 export default class App extends Component {
-
-
-  constructor(props){
-
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
-      filmes: []
+      LarAnimada: new Animated.Value(150),
+      AltAnimada: new Animated.Value(50),
+      OpAnimada: new Animated.Value(1),
     }
 
+    Animated.parallel([
+
+      Animated.timing(
+        this.state.AltAnimada,
+        {
+          toValue: 200,
+          duration: 2000
+        }
+      ),
+      Animated.timing(
+        this.state.LarAnimada,
+        {
+          toValue: 300,
+          duration: 2000
+        }
+      ),
+      Animated.timing(
+        this.state.OpAnimada,
+        {
+          toValue: 0,
+          duration: 2000
+        }
+      ),
+    ]).start()
+
+    // Animated.timing(
+    //   this.state.AltAnimada,
+    //     {
+    //       toValue: 300,
+    //       duration: 2000
+    //     }
+    // ).start()
+
   }
 
-  async componentDidMount(){
-    const response = await api.get('r-api/?api=filmes')
-    this.setState({
-      filmes: response.data
-    })
-  }
-
- 
-  render(){
+  render() {
     return (
-      <View style={styles.container}> 
-        <FlatList 
-          data={this.state.filmes}
-          keyExtractor={ item => item.id.toString() }
-          renderItem={ ({item}) => <Filmes data={item} /> }
-        />
+      <View style={styles.container}>
+        <Animated.View
+          style={{
+            width: this.state.LarAnimada,
+            height: this.state.AltAnimada,
+            opacity: this.state.OpAnimada,
+            backgroundColor: "#4169E1",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: 22, textAlign: "center" }}>Loading...</Text>
+        </Animated.View>
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
-    backgroundColor: 'blue'
-  }
-})
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
