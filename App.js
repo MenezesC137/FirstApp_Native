@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
-import { View, StyleSheet, Text, FlatList, Animated } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Animated,
+  TouchableOpacity,
+} from "react-native";
 
 export default class App extends Component {
   constructor(props) {
@@ -9,39 +15,35 @@ export default class App extends Component {
     this.state = {
       LarAnimada: new Animated.Value(150),
       AltAnimada: new Animated.Value(50),
-    }
-
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(
-          this.state.LarAnimada,
-          {
-            toValue: 200,
-            duration: 2000
-          }
-        ),
-        Animated.timing(
-          this.state.LarAnimada,
-          {
-            toValue: 150,
-            duration: 2000
-          }
-        )
-      ]) 
-    ).start()
-
+    };
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <View
+          style={{
+            height: 80,
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+            backgroundColor: "#4169E1",
+          }}
+        >
+          <TouchableOpacity onPress={this.carregar}>
+            <Text style={{fontSize: 25}}>
+              Gerar grafico
+            </Text>
+          </TouchableOpacity>
+        </View>
+
         <Animated.View
           style={{
             width: this.state.LarAnimada,
             height: this.state.AltAnimada,
             backgroundColor: "#4169E1",
             justifyContent: "center",
-            borderRadius: 25
+            borderRadius: 25,
           }}
         >
           <Text style={{ fontSize: 22, textAlign: "center" }}>Loading...</Text>
@@ -54,7 +56,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: 50
   },
 });
