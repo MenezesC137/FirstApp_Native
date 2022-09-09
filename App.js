@@ -9,41 +9,26 @@ export default class App extends Component {
     this.state = {
       LarAnimada: new Animated.Value(150),
       AltAnimada: new Animated.Value(50),
-      OpAnimada: new Animated.Value(1),
     }
 
-    Animated.parallel([
-
-      Animated.timing(
-        this.state.AltAnimada,
-        {
-          toValue: 200,
-          duration: 2000
-        }
-      ),
-      Animated.timing(
-        this.state.LarAnimada,
-        {
-          toValue: 300,
-          duration: 2000
-        }
-      ),
-      Animated.timing(
-        this.state.OpAnimada,
-        {
-          toValue: 0,
-          duration: 2000
-        }
-      ),
-    ]).start()
-
-    // Animated.timing(
-    //   this.state.AltAnimada,
-    //     {
-    //       toValue: 300,
-    //       duration: 2000
-    //     }
-    // ).start()
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(
+          this.state.LarAnimada,
+          {
+            toValue: 200,
+            duration: 2000
+          }
+        ),
+        Animated.timing(
+          this.state.LarAnimada,
+          {
+            toValue: 150,
+            duration: 2000
+          }
+        )
+      ]) 
+    ).start()
 
   }
 
@@ -54,9 +39,9 @@ export default class App extends Component {
           style={{
             width: this.state.LarAnimada,
             height: this.state.AltAnimada,
-            opacity: this.state.OpAnimada,
             backgroundColor: "#4169E1",
             justifyContent: "center",
+            borderRadius: 25
           }}
         >
           <Text style={{ fontSize: 22, textAlign: "center" }}>Loading...</Text>
